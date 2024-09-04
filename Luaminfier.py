@@ -1,33 +1,33 @@
-# IF YOUR MINIFIER CLOSES ON ITSELF, YOU HAVE DONE SOMETHING WRONG CONTACT ME ON MY GMAIL
-# MAKE SURE TO ENTER THE FILE YOU WANT TO DEOBFUSCATE OR MINIMIZE TO YOUR ADMINISTRATOR ACCOUNT
-# UNDER THE DOCUMENTS FOLDER AND MAKE SURE THE FILE IS NAMED obfuscated.lua !!!
-
 import re
 import os
 import base64
 
-# --- Placeholder for Decompiler ---
-def decompile_lua(bytecode):
-    return bytecode
+# IF YOUR MINIFIER CLOSES ON ITSELF, YOU HAVE DONE SOMETHING WRONG CONTACT ME ON MY GMAIL
+# MAKE SURE TO ENTER THE FILE YOU WANT TO DEOBFUSCATE OR MINIMIZE TO YOUR ADMINISTRATOR ACCOUNT
+# UNDER THE DOCUMENTS FOLDER AND MAKE SURE THE FILE IS NAMED obfuscated.lua !!!
+# ALSO IM UNDER THE C:\ DRIVE CHANGE TO YOUR WILL
 
-# --- Minimizer Function ---
-def minimize_code(code):
-    code = re.sub(r'--.*', '', code)  # Remove comments
-    code = re.sub(r'\s+', ' ', code)  # Remove unnecessary whitespace
-    code = re.sub(r'\s*([{};=+*/%(),])\s*', r'\1', code)
-    return code
 
 # --- Beautifier Function ---
 def beautify_code(code):
     indent_level = 0
     beautified_code = ''
-    for line in code.split(';'):
+    indent_keywords = {'function', 'if', 'else', 'elseif', 'for', 'while', 'do'}
+    unindent_keywords = {'end', 'else', 'elseif'}
+    lines = re.split(r'(\b(?:function|if|else|elseif|for|while|do|end)\b|\n|;)', code)
+
+    for line in lines:
         stripped_line = line.strip()
-        if stripped_line.endswith('}'):
+
+        if stripped_line in unindent_keywords:
             indent_level -= 1
-        beautified_code += '    ' * indent_level + stripped_line + ';\n'
-        if stripped_line.endswith('{'):
+
+        if stripped_line:
+            beautified_code += '    ' * indent_level + stripped_line + '\n'
+
+        if stripped_line in indent_keywords:
             indent_level += 1
+
     return beautified_code.strip()
 
 # --- Lua Parsing Functions ---
@@ -57,11 +57,9 @@ def process_lua_code(file_path):
     with open(file_path, 'r') as file:
         lua_code = file.read()
 
-    lua_code = decompile_lua(lua_code)
     lua_code = decode_strings(lua_code)
     variables, _ = parse_lua_code(lua_code)
     lua_code = deobfuscate_variables(lua_code, variables)
-    lua_code = minimize_code(lua_code)
     lua_code = beautify_code(lua_code)
 
     return lua_code
@@ -81,7 +79,3 @@ def main():
 # Execute the main function
 if __name__ == "__main__":
     main()
-
-# --- Updated Beautifier Function ---
-def beautify_code(code):
-    return beautify_lua_code_with_local(code)
