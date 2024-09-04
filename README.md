@@ -1,4 +1,4 @@
-'' PYTHON TO LUA CODING''
+ PYTHON TO LUA CODING
 
 Luaminfier.py basically makes your script a bit more readable.✔️
 
