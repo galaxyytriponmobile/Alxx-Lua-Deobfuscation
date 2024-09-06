@@ -64,7 +64,7 @@ def deobfuscate_functions(code, functions):
     counter = 1
 
     for func in functions:
-        deobf_func = f'deobf_{counter}'
+        deobf_func = f'deobf_func_{counter}'
         deobf_map[func] = deobf_func
         counter += 1
 
@@ -84,6 +84,51 @@ def decode_strings(code):
 
     return re.sub(r'base64.decode\("([^"]+)"\)', decode_base64, code)
 
+# --- Makeshift Decompiler with More Features ---
+def makeshift_decompiler(code):
+    # --- Function Simplification ---
+    # Simplify function definitions with obfuscated arguments
+    code = re.sub(r'function\s*\(.*?\)', 'function(...)', code)  # Simplify function to use variable arguments
+    
+    # --- Common Obfuscation Patterns ---
+    # Reconstruct loops
+    code = re.sub(r'for\s*([\w_]+)\s*=.*?do', r'for \1 = ... do', code)  # Simplify obfuscated loops
+    
+    # Simplify if conditions with complex logic
+    code = re.sub(r'if\s*\(.*?\)\sthen', 'if condition then', code)  # Simplify complex conditions
+    
+    # --- String Manipulation Patterns ---
+    # Detect and reverse common string obfuscation patterns
+    # For example: string.char(65, 66, 67) -> "ABC"
+    code = re.sub(r'string\.char\(([\d, ]+)\)', lambda match: ''.join(chr(int(x)) for x in match.group(1).split(',')), code)
+
+    # --- Deobfuscate Tables ---
+    # Decompile common table-based obfuscations (arrays of functions/strings)
+    # For example: table = { [1] = "print('Hello')" } -> table = { "print('Hello')" }
+    code = re.sub(r'\[(\d+)\]\s*=\s*', '', code)  # Simplify table access using numbers as keys
+    
+    # Detect and deobfuscate common function call patterns
+    code = re.sub(r'\w+\(\s*function\s*\(.*?\)\s*', 'function(...) ', code)  # Simplify inline function calls
+    
+    # --- Math Obfuscation Simplifications ---
+    # Decompile common math-based obfuscation (e.g., constant arithmetic)
+    # For example: 10 + 5 -> 15
+    code = re.sub(r'(\d+)\s*\+\s*(\d+)', lambda match: str(int(match.group(1)) + int(match.group(2))), code)
+    code = re.sub(r'(\d+)\s*\-\s*(\d+)', lambda match: str(int(match.group(1)) - int(match.group(2))), code)
+
+    # --- Flow Control Simplifications ---
+    # Simplify while loops with obfuscated conditions
+    code = re.sub(r'while\s*\(.*?\)\s*do', 'while true do', code)  # Simplify obfuscated while loop conditions
+    
+    # --- Generic Patterns ---
+    # Add comments for loadstring calls
+    code = re.sub(r'loadstring\((.*?)\)', r'-- Decompiled loadstring: \1', code)  # Simulate decompiling loadstring calls
+    
+    # Remove complex patterns or unnecessary extra characters
+    code = re.sub(r'[^\S\n]+$', '', code, flags=re.MULTILINE)  # Clean up trailing spaces on lines
+    
+    return code
+
 # --- Full Processing Pipeline ---
 def process_lua_code(file_path):
     with open(file_path, 'r') as file:
@@ -98,6 +143,9 @@ def process_lua_code(file_path):
     
     # Add newlines after semicolons and ensure new lines
     lua_code = add_newlines_after_semicolons(lua_code)
+    
+    # Apply makeshift decompiler
+    lua_code = makeshift_decompiler(lua_code)
     
     # Beautify the code
     lua_code = beautify_code(lua_code)
