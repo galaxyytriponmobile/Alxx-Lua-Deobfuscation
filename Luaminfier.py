@@ -2,12 +2,6 @@ import re
 import os
 import base64
 
-# IF YOUR MINIFIER CLOSES ON ITSELF, YOU HAVE DONE SOMETHING WRONG CONTACT ME ON MY GMAIL
-# MAKE SURE TO ENTER THE FILE YOU WANT TO DEOBFUSCATE OR MINIMIZE TO YOUR ADMINISTRATOR ACCOUNT
-# UNDER THE DOCUMENTS FOLDER AND MAKE SURE THE FILE IS NAMED obfuscated.lua !!!
-# ALSO IM UNDER THE C:\ DRIVE CHANGE TO YOUR WILL UNDER LINE 69 AND 72
-
-
 # --- Beautifier Function ---
 def beautify_code(code):
     indent_level = 0
@@ -37,8 +31,31 @@ def parse_lua_code(code):
     return variables, functions
 
 def deobfuscate_variables(code, variables):
+    deobf_map = {}
+    counter = 1
+    
     for var in variables:
-        code = re.sub(r'\b' + re.escape(var) + r'\b', 'deobf_' + var, code)
+        deobf_var = f'deobf_{counter}'
+        deobf_map[var] = deobf_var
+        counter += 1
+
+    for var, deobf_var in deobf_map.items():
+        code = re.sub(r'\b' + re.escape(var) + r'\b', deobf_var, code)
+
+    return code
+
+def deobfuscate_functions(code, functions):
+    deobf_map = {}
+    counter = 1
+
+    for func in functions:
+        deobf_func = f'deobf_{counter}'
+        deobf_map[func] = deobf_func
+        counter += 1
+
+    for func, deobf_func in deobf_map.items():
+        code = re.sub(r'\b' + re.escape(func) + r'\b', deobf_func, code)
+
     return code
 
 def decode_strings(code):
@@ -58,8 +75,9 @@ def process_lua_code(file_path):
         lua_code = file.read()
 
     lua_code = decode_strings(lua_code)
-    variables, _ = parse_lua_code(lua_code)
+    variables, functions = parse_lua_code(lua_code)
     lua_code = deobfuscate_variables(lua_code, variables)
+    lua_code = deobfuscate_functions(lua_code, functions)
     lua_code = beautify_code(lua_code)
 
     return lua_code
