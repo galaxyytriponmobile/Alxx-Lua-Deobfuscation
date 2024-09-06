@@ -21,3 +21,5 @@ I will try and add a decompiler into it and with the help of AI.
  UPDATE 4: Re-added semi-colons to help readability.
 
 🔥UPDATE 5: DECOMPILER UPDATE; MAKESHIFT DECOMPILER ADDED! CHECK CODE🔥
+
+ UPDATE 5: New update for putting a space infront of the word "local".
