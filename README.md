@@ -22,4 +22,6 @@ I will try and add a decompiler into it and with the help of AI.
 
 🔥UPDATE 5: DECOMPILER UPDATE; MAKESHIFT DECOMPILER ADDED! CHECK CODE🔥
 
- UPDATE 5: New update for putting a space infront of the word "local".
+ UPDATE 6: New update for putting a space infront of the word "local".
+
+ UPDATE 7: New features added to makeshift decompiler.
