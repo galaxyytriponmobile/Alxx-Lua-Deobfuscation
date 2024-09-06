@@ -1,10 +1,11 @@
-------------------------------------------------------------
-DO NOT START THE CODE WITHOUT KNOW THIS FIRST!!!
-TWEAK THE CODE AT LINE 106 AND 109 BEFORE USING THE SCRIPT!!!
- ------------------------------------------------------------
 
- # FILE IS UP AND RUNNING #
- 
+#DO NOT START THE CODE WITHOUT KNOW THIS FIRST!!!#
+#TWEAK THE CODE AT LINE 106 AND 109 BEFORE USING THE SCRIPT!!!#
+
+ ------------------------------------------------------------
+  FILE IS UP AND RUNNING 
+ ------------------------------------------------------------
+  
  PYTHON TO LUA CODING
 
 Luaminfier.py basically makes your script a bit more readable.✔️
