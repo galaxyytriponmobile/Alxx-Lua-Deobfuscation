@@ -126,7 +126,10 @@ def makeshift_decompiler(code):
     
     # Remove complex patterns or unnecessary extra characters
     code = re.sub(r'[^\S\n]+$', '', code, flags=re.MULTILINE)  # Clean up trailing spaces on lines
-    
+
+    # --- Add Space Before and After "local" ---
+    code = re.sub(r'\blocal\b', ' local', code)  # Add space around "local"
+
     return code
 
 # --- Full Processing Pipeline ---
