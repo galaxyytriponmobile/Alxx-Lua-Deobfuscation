@@ -1,7 +1,6 @@
 ------------------------------------------------------------
 DO NOT START THE CODE WITHOUT KNOW THIS FIRST!!!
 TWEAK THE CODE AT LINE 106 AND 109 BEFORE USING THE SCRIPT!!!
-THIS IS SO THE CODE WILL GET THE SCRIPT FROM A FILE AND PLACE IT ON YOUR DESKTOP
  ------------------------------------------------------------
 
  # FILE IS UP AND RUNNING #
