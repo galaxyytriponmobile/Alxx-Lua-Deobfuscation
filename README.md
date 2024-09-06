@@ -1,5 +1,5 @@
  ------------------------------------------------------------
-DO NOT START THE CODE WITHOUT KNOW THIS FIRST!!!
+DO NOT START THE CODE WITHOUT KNOWING THIS FIRST!!!
 TWEAK THE CODE AT LINE 106 AND 109 BEFORE USING THE SCRIPT!!!
  ------------------------------------------------------------
 
