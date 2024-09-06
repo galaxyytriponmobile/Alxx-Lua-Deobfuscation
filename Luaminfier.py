@@ -29,7 +29,10 @@ def remove_semicolons_and_ensure_newlines(code):
     # Remove all semicolons
     code = re.sub(r';', '', code)
     
-    # Split the code by semicolons and make sure each statement starts on a new line
+    # Add newlines after closing brackets (), {}, or []
+    code = re.sub(r'(\)|\}|\])', r'\1\n', code)
+
+    # Ensure that lines after closing brackets start on a new line
     lines = code.splitlines()  # Split into individual lines
     
     # Ensure each line starts on a new line
