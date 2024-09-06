@@ -1,6 +1,6 @@
  ------------------------------------------------------------
 🔥DO NOT START THE CODE WITHOUT KNOWING THIS FIRST!!!
- TWEAK THE CODE AT LINE 112 AND 109 BEFORE USING THE SCRIPT!!!
+ TWEAK THE CODE AT LINE 160 AND 163 BEFORE USING THE SCRIPT!!!
  ------------------------------------------------------------
 
 PYTHON TO LUA CODING
