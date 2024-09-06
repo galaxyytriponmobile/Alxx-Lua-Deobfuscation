@@ -24,6 +24,18 @@ def beautify_code(code):
 
     return beautified_code.strip()
 
+# --- Remove Semicolons and Ensure New Lines ---
+def remove_semicolons_and_ensure_newlines(code):
+    # Remove all semicolons
+    code = re.sub(r';', '', code)
+    
+    # Split the code by semicolons and make sure each statement starts on a new line
+    lines = code.splitlines()  # Split into individual lines
+    
+    # Ensure each line starts on a new line
+    formatted_code = '\n'.join(line.strip() for line in lines if line.strip())  # Removing any extra spaces and blank lines
+    return formatted_code
+
 # --- Lua Parsing Functions ---
 def parse_lua_code(code):
     variables = re.findall(r'local\s+([\w_]+)\s*=', code)
@@ -76,8 +88,15 @@ def process_lua_code(file_path):
 
     lua_code = decode_strings(lua_code)
     variables, functions = parse_lua_code(lua_code)
+    
+    # Deobfuscate variables and functions with sequential names
     lua_code = deobfuscate_variables(lua_code, variables)
     lua_code = deobfuscate_functions(lua_code, functions)
+    
+    # Remove semicolons and ensure new lines
+    lua_code = remove_semicolons_and_ensure_newlines(lua_code)
+    
+    # Beautify the code
     lua_code = beautify_code(lua_code)
 
     return lua_code
