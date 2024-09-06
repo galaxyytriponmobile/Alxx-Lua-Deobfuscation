@@ -18,3 +18,5 @@ UPDATE 2: Removing semicolons update done.
 UPDATE 3: Also added if the script encounters a ) } ] it starts in a new line.
 
 UPDATE 4: Re-added semi-colons to help readability.
+
+#UPDATE 5: DECOMPILER UPDATE; MAKESHIFT DECOMPILER ADDED! CHECK CODE
