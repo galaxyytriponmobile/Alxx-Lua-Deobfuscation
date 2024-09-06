@@ -24,10 +24,10 @@ def beautify_code(code):
 
     return beautified_code.strip()
 
-# --- Remove Semicolons and Ensure New Lines ---
-def remove_semicolons_and_ensure_newlines(code):
-    # Remove all semicolons
-    code = re.sub(r';', '', code)
+# --- Add New Line After Semicolons and Ensure New Lines ---
+def add_newlines_after_semicolons(code):
+    # Add a newline after each semicolon, but keep the semicolon
+    code = re.sub(r';', ';\n', code)
     
     # Add newlines after closing brackets (), {}, or []
     code = re.sub(r'(\)|\}|\])', r'\1\n', code)
@@ -96,8 +96,8 @@ def process_lua_code(file_path):
     lua_code = deobfuscate_variables(lua_code, variables)
     lua_code = deobfuscate_functions(lua_code, functions)
     
-    # Remove semicolons and ensure new lines
-    lua_code = remove_semicolons_and_ensure_newlines(lua_code)
+    # Add newlines after semicolons and ensure new lines
+    lua_code = add_newlines_after_semicolons(lua_code)
     
     # Beautify the code
     lua_code = beautify_code(lua_code)
