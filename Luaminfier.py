@@ -26,17 +26,10 @@ def beautify_code(code):
 
 # --- Add New Line After Semicolons and Ensure New Lines ---
 def add_newlines_after_semicolons(code):
-    # Add a newline after each semicolon, but keep the semicolon
     code = re.sub(r';', ';\n', code)
-    
-    # Add newlines after closing brackets (), {}, or []
     code = re.sub(r'(\)|\}|\])', r'\1\n', code)
-
-    # Ensure that lines after closing brackets start on a new line
-    lines = code.splitlines()  # Split into individual lines
-    
-    # Ensure each line starts on a new line
-    formatted_code = '\n'.join(line.strip() for line in lines if line.strip())  # Removing any extra spaces and blank lines
+    lines = code.splitlines()
+    formatted_code = '\n'.join(line.strip() for line in lines if line.strip())
     return formatted_code
 
 # --- Lua Parsing Functions ---
@@ -50,7 +43,7 @@ def deobfuscate_variables(code, variables):
     counter = 1
     
     for var in variables:
-        deobf_var = f'deobf_{counter}'
+        deobf_var = f'deobf_var_{counter}'
         deobf_map[var] = deobf_var
         counter += 1
 
@@ -84,51 +77,75 @@ def decode_strings(code):
 
     return re.sub(r'base64.decode\("([^"]+)"\)', decode_base64, code)
 
-# --- Makeshift Decompiler with More Features ---
+# --- New Deobfuscation Features ---
+def simplify_boolean_expressions(code):
+    # Simplify boolean expressions like "if true then" to "if true then"
+    code = re.sub(r'\bif\s+true\s+then\b', 'if true then', code)
+    code = re.sub(r'\bif\s+false\s+then\b', 'if false then', code)
+    return code
+
+def simplify_string_concatenation(code):
+    # Simplify concatenation of string literals, e.g., "hello" .. "world" -> "helloworld"
+    return re.sub(r'"([^"]+)"\s*\.\.\s*"([^"]+)"', lambda m: f'"{m.group(1)}{m.group(2)}"', code)
+
+def decode_hex_strings(code):
+    # Convert hexadecimal strings to plain text if detected
+    return re.sub(r'\\x([0-9a-fA-F]{2})', lambda m: chr(int(m.group(1), 16)), code)
+
+def unroll_loops(code):
+    # Unroll basic loops for constant ranges
+    def loop_unroll(match):
+        var, start, end = match.groups()
+        return '\n'.join([f'{var} = {i}' for i in range(int(start), int(end) + 1)])
+
+    return re.sub(r'for\s+(\w+)\s*=\s*(\d+),\s*(\d+)\s*do', loop_unroll, code)
+
+def preserve_comments(code):
+    # Capture and preserve comments in obfuscated code
+    return re.sub(r'--.*', lambda m: f'{m.group(0)}', code)
+
+# --- Makeshift Decompiler with Enhanced Features ---
 def makeshift_decompiler(code):
-    # --- Function Simplification ---
-    # Simplify function definitions with obfuscated arguments
-    code = re.sub(r'function\s*\(.*?\)', 'function(...)', code)  # Simplify function to use variable arguments
+    # Simplify function definitions
+    code = re.sub(r'function\s*\(.*?\)', 'function(...)', code)
     
-    # --- Common Obfuscation Patterns ---
-    # Reconstruct loops
-    code = re.sub(r'for\s*([\w_]+)\s*=.*?do', r'for \1 = ... do', code)  # Simplify obfuscated loops
+    # Simplify obfuscated loops
+    code = re.sub(r'for\s*([\w_]+)\s*=.*?do', r'for \1 = ... do', code)
     
-    # Simplify if conditions with complex logic
-    code = re.sub(r'if\s*\(.*?\)\sthen', 'if condition then', code)  # Simplify complex conditions
+    # Simplify complex conditions
+    code = re.sub(r'if\s*\(.*?\)\sthen', 'if condition then', code)
     
-    # --- String Manipulation Patterns ---
-    # Detect and reverse common string obfuscation patterns
-    # For example: string.char(65, 66, 67) -> "ABC"
-    code = re.sub(r'string\.char\(([\d, ]+)\)', lambda match: ''.join(chr(int(x)) for x in match.group(1).split(',')), code)
-
-    # --- Deobfuscate Tables ---
-    # Decompile common table-based obfuscations (arrays of functions/strings)
-    # For example: table = { [1] = "print('Hello')" } -> table = { "print('Hello')" }
-    code = re.sub(r'\[(\d+)\]\s*=\s*', '', code)  # Simplify table access using numbers as keys
+    # Reverse string obfuscation patterns
+    code = re.sub(r'string\.char\(([\d, ]+)\)', lambda m: ''.join(chr(int(x)) for x in m.group(1).split(',')), code)
     
-    # Detect and deobfuscate common function call patterns
-    code = re.sub(r'\w+\(\s*function\s*\(.*?\)\s*', 'function(...) ', code)  # Simplify inline function calls
+    # Simplify tables with numbered keys
+    code = re.sub(r'\[(\d+)\]\s*=\s*', '', code)
     
-    # --- Math Obfuscation Simplifications ---
-    # Decompile common math-based obfuscation (e.g., constant arithmetic)
-    # For example: 10 + 5 -> 15
-    code = re.sub(r'(\d+)\s*\+\s*(\d+)', lambda match: str(int(match.group(1)) + int(match.group(2))), code)
-    code = re.sub(r'(\d+)\s*\-\s*(\d+)', lambda match: str(int(match.group(1)) - int(match.group(2))), code)
-
-    # --- Flow Control Simplifications ---
-    # Simplify while loops with obfuscated conditions
-    code = re.sub(r'while\s*\(.*?\)\s*do', 'while true do', code)  # Simplify obfuscated while loop conditions
+    # Handle inline function patterns
+    code = re.sub(r'\w+\(\s*function\s*\(.*?\)\s*', 'function(...) ', code)
     
-    # --- Generic Patterns ---
-    # Add comments for loadstring calls
-    code = re.sub(r'loadstring\((.*?)\)', r'-- Decompiled loadstring: \1', code)  # Simulate decompiling loadstring calls
+    # Simplify math expressions
+    code = re.sub(r'(\d+)\s*\+\s*(\d+)', lambda m: str(int(m.group(1)) + int(m.group(2))), code)
+    code = re.sub(r'(\d+)\s*\-\s*(\d+)', lambda m: str(int(m.group(1)) - int(m.group(2))), code)
     
-    # Remove complex patterns or unnecessary extra characters
-    code = re.sub(r'[^\S\n]+$', '', code, flags=re.MULTILINE)  # Clean up trailing spaces on lines
-
-    # --- Add Space Before and After "local" ---
-    code = re.sub(r'\blocal\b', ' local', code)  # Add space around "local"
+    # Simplify while loops
+    code = re.sub(r'while\s*\(.*?\)\s*do', 'while true do', code)
+    
+    # Add comments for loadstring
+    code = re.sub(r'loadstring\((.*?)\)', r'-- Decompiled loadstring: \1', code)
+    
+    # Clean up trailing spaces
+    code = re.sub(r'[^\S\n]+$', '', code, flags=re.MULTILINE)
+    
+    # Add space around "local"
+    code = re.sub(r'\blocal\b', ' local ', code)
+    
+    # Apply new features
+    code = simplify_boolean_expressions(code)
+    code = simplify_string_concatenation(code)
+    code = decode_hex_strings(code)
+    code = unroll_loops(code)
+    code = preserve_comments(code)
 
     return code
 
@@ -140,17 +157,13 @@ def process_lua_code(file_path):
     lua_code = decode_strings(lua_code)
     variables, functions = parse_lua_code(lua_code)
     
-    # Deobfuscate variables and functions with sequential names
     lua_code = deobfuscate_variables(lua_code, variables)
     lua_code = deobfuscate_functions(lua_code, functions)
     
-    # Add newlines after semicolons and ensure new lines
     lua_code = add_newlines_after_semicolons(lua_code)
     
-    # Apply makeshift decompiler
     lua_code = makeshift_decompiler(lua_code)
     
-    # Beautify the code
     lua_code = beautify_code(lua_code)
 
     return lua_code
