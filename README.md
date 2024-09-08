@@ -1,14 +1,15 @@
-⚠️ **IMPORTANT NOTICE: READ BEFORE STARTING THE SCRIPT!** ⚠️
+# ⚠️ IMPORTANT NOTICE: READ BEFORE STARTING THE SCRIPT! ⚠️
 ------------------------------------------------------------
 🚨 **DO NOT EXECUTE THE CODE WITHOUT FOLLOWING THESE INSTRUCTIONS!** 🚨  
-Make sure to **TWEAK THE CODE** at **Line 173** and **Line 176** before running the script.
-------------------------------------------------------------
+Make sure to **TWEAK THE CODE** at **Line 173** and **Line 176** before running the script.  
+------------------------------------------------------------  
 
 **Potential Issues**  
 If the script **closes unexpectedly**, you may have misconfigured it during the tweaks.  
 Please **double-check** your adjustments before trying again.
 
 ---
+
 ### 🐍 Python to Lua Converter
 
 **Luaminfier.py**: A utility to make your Lua scripts more readable. ✔️
@@ -41,3 +42,12 @@ I am working to enhance them further, and with AI's assistance, I'll be adding a
 
 **UPDATE 7**:  
 - Additional features added to the makeshift decompiler.
+
+---
+
+### 🔥 **UPDATE 8 (LATEST)** 🔥  
+- **Enhanced Error Handling**: Added try-except blocks to manage file operations and decoding errors.  
+- **Refactoring**: Merged `deobfuscate_variables` and `deobfuscate_functions` into a reusable `deobfuscate_names` function for more maintainable code.  
+- **Regex Optimization**: Simplified regular expressions for better performance.  
+- **Edge Case Handling**: Improved handling of missing or malformed Lua code files.  
+- **Logging & Error Feedback**: Replaced prints with meaningful error feedback for better issue tracing.
