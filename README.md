@@ -1,27 +1,43 @@
- ------------------------------------------------------------
-🔥DO NOT START THE CODE WITHOUT KNOWING THIS FIRST!!!
- TWEAK THE CODE AT LINE 173 AND 176 BEFORE USING THE SCRIPT!!!
- ------------------------------------------------------------
+⚠️ **IMPORTANT NOTICE: READ BEFORE STARTING THE SCRIPT!** ⚠️
+------------------------------------------------------------
+🚨 **DO NOT EXECUTE THE CODE WITHOUT FOLLOWING THESE INSTRUCTIONS!** 🚨  
+Make sure to **TWEAK THE CODE** at **Line 173** and **Line 176** before running the script.
+------------------------------------------------------------
 
-PYTHON TO LUA CODING
+**Potential Issues**  
+If the script **closes unexpectedly**, you may have misconfigured it during the tweaks.  
+Please **double-check** your adjustments before trying again.
 
-Luaminfier.py basically makes your script a bit more readable.✔️
+---
+### 🐍 Python to Lua Converter
 
-All of these scripts were made by AI, semi-working as of right now,
-I will try and add a decompiler into it and with the help of AI.
+**Luaminfier.py**: A utility to make your Lua scripts more readable. ✔️
 
+---
 
- UPDATE 1: I have done some updates, currently it is pretty good, renames functions variables etc. to numbers to make it more readable, and i am 
- working on getting rid of any semicolons and starting the code at a new line.
+All scripts were generated using AI and are currently semi-functional.  
+I am working to enhance them further, and with AI's assistance, I'll be adding a decompiler.
 
- UPDATE 2: Removing semicolons update done.
+### 📋 **Changelog**:
 
- UPDATE 3: Also added if the script encounters a ) } ] it starts in a new line.
+**UPDATE 1**:  
+- Improved the code by renaming functions, variables, etc., to numbers, increasing readability.  
+- Started removing semicolons for better formatting.  
 
- UPDATE 4: Re-added semi-colons to help readability.
+**UPDATE 2**:  
+- Semicolon removal **completed**.  
 
-🔥UPDATE 5: DECOMPILER UPDATE; MAKESHIFT DECOMPILER ADDED! CHECK CODE🔥
+**UPDATE 3**:  
+- Now adds a **new line** after encountering closing characters `)`, `}`, `]`.
 
- UPDATE 6: New update for putting a space infront of the word "local".
+**UPDATE 4**:  
+- **Re-added semicolons** to improve readability.
 
- UPDATE 7: New features added to makeshift decompiler.
+🔥 **UPDATE 5: DECOMPILER FEATURE ADDED!** 🔥  
+- A makeshift decompiler has been implemented—check it out!
+
+**UPDATE 6**:  
+- Inserted a space before the keyword `"local"` for better formatting.
+
+**UPDATE 7**:  
+- Additional features added to the makeshift decompiler.
