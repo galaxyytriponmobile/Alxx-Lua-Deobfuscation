@@ -138,7 +138,7 @@ def makeshift_decompiler(code):
     code = re.sub(r'[^\S\n]+$', '', code, flags=re.MULTILINE)
     
     # Add space around "local"
-    code = re.sub(r'\blocal\b', ' local ', code)
+    code = re.sub(r'\blocal\b', ' local', code)
     
     # Apply new features
     code = simplify_boolean_expressions(code)
