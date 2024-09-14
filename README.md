@@ -1,6 +1,6 @@
 # 🐍 Python to Lua Converter
 
-**Luaminifier.py** and **Luaminf.manual.py**: Utilities to make your Lua scripts more readable and manageable. ✔️
+**Luaminifier.py** and **Luaminf.manual.py**: Powerful Python utilities for deobfuscating and beautifying Lua scripts. These scripts allow you to make your Lua code more readable through automatic and manual renaming of variables and functions, as well as advanced decompilation techniques.
 
 ---
 
@@ -27,13 +27,15 @@ A Python-based tool designed to enhance the readability of obfuscated Lua script
 - **Handling Encoded Strings**: Decodes base64-encoded and hex-encoded strings in the Lua code.
 - **Optimized for Performance**: Regex optimizations and error handling for better script performance.
 
-### 2. **Luaminf.manual.py**
-A complementary script to **Luaminifier.py**. This tool offers **manual renaming** of variables and functions after the initial deobfuscation process, giving users full control over making Lua scripts readable and maintainable.
+### 2. **Luaminf.manual.py** (NEW)
+A complementary script to **Luaminifier.py**. This tool offers **manual and automated renaming** of variables and functions after the initial deobfuscation process, giving users full control over making Lua scripts readable and maintainable.
 
-#### Features:
-- **Interactive Renaming**: Detects all variables and functions in the deobfuscated Lua script and prompts the user for more meaningful names.
-- **File Handling**: Automatically saves the updated Lua script to a new file with all manual renaming applied.
-- **Improved Script Management**: Allows you to clean up poorly named variables and functions in a Lua script, making it human-readable and easier to maintain.
+#### Key Features:
+- **Interactive Renaming**: Detects all variables and functions in the deobfuscated Lua script and allows the user to manually rename them for better readability.
+- **Automated Renaming**: Offers an option to automatically rename variables and functions based on predefined patterns.
+- **Advanced Decompilation Techniques**: Simplifies complex Lua patterns, such as obfuscated table indexing and function signatures, making the code more readable.
+- **File Handling**: Automatically saves the updated Lua script to a new file with all renaming applied.
+- **Improved Edge Case Handling**: Gracefully handles missing or malformed Lua code files and provides meaningful error feedback.
 
 ---
 
@@ -64,11 +66,10 @@ A complementary script to **Luaminifier.py**. This tool offers **manual renaming
 ---
 
 ### 🔥 **UPDATE 8 (LATEST)** 🔥  
-- **Enhanced Error Handling**: Added try-except blocks to manage file operations and decoding errors.  
-- **Refactoring**: Merged `deobfuscate_variables` and `deobfuscate_functions` into a reusable `deobfuscate_names` function for more maintainable code.  
-- **Regex Optimization**: Simplified regular expressions for better performance.  
-- **Edge Case Handling**: Improved handling of missing or malformed Lua code files.  
-- **Logging & Error Feedback**: Replaced prints with meaningful error feedback for better issue tracing.
+- **Predefined Renaming Patterns**: You can now automatically rename variables and functions based on a custom prefix, simplifying the renaming process.
+- **Advanced Decompilation**: Added new techniques to handle more complex obfuscation patterns in Lua code, such as table indexing simplification.
+- **Improved Edge Case Handling**: Enhanced error handling for missing or malformed Lua files, ensuring more robust execution.
+- **Logging & Error Feedback**: Improved logging for better issue tracing.
 
 ---
 
@@ -82,17 +83,23 @@ A complementary script to **Luaminifier.py**. This tool offers **manual renaming
     python luaminifier.py
     ```
 
-### Step 2: Run **Luaminf.manual.py** for Manual Renaming
-1. Once your Lua code is deobfuscated, run `luaminf.manual.py` to manually rename variables and functions for better readability.
-2. This will prompt you to input new names for each detected variable and function:
+### Step 2: Run **Luaminf.manual.py** for Manual/Automated Renaming
+1. Once your Lua code is deobfuscated, run `luaminf.manual.py` to manually or automatically rename variables and functions for better readability.
+2. The script will prompt you to either manually rename or automate the renaming based on a pattern:
     ```bash
     python luaminf.manual.py
     ```
-3. The manually renamed Lua script will be saved as a new file (e.g., `my_lua_script_renamed.lua`).
+3. The manually or automatically renamed Lua script will be saved as a new file (e.g., `my_lua_script_renamed.lua`).
 
 ---
 
 ## 🛠️ **Planned Features**:
-- Integration of more advanced decompilation techniques.
-- Automating the manual renaming process based on predefined patterns.
-- Improving edge case handling for more complex obfuscated scripts.
+- **Further Advanced Decompilation**: More techniques to handle highly complex obfuscated Lua code structures.
+- **Pattern-based Renaming Enhancements**: Improve the automation of renaming by using smarter patterns that analyze the Lua code for context-aware naming.
+- **Comprehensive Error Handling**: Enhancing robustness against malformed scripts, particularly for unconventional obfuscation methods.
+- **Increased Logging and Debugging Support**: Providing more detailed logs for better debugging of Lua scripts during the deobfuscation process.
+
+---
+
+## 💡 **Contributing**
+If you have suggestions or improvements, feel free to open an issue or submit a pull request! Contributions are always welcome to help enhance these Lua deobfuscation tools.
