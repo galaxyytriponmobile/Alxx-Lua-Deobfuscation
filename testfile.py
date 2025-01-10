@@ -1,8 +1,18 @@
+import sys
+import subprocess
 import re
 import os
 import base64
 import openai
 
+# --- Install OpenAI if not installed ---
+def install_openai():
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "openai"])
+    except subprocess.CalledProcessError:
+        print("Failed to install openai. Exiting...")
+        sys.exit(1)
+        
 # --- Beautifier Function ---
 def beautify_code(code):
     indent_level = 0
