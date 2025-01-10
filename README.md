@@ -30,6 +30,13 @@ A Python-based tool designed to enhance the readability of obfuscated Lua script
 ### 2. **Luaminf.manual.py** (NEW)
 A complementary script to **Luaminifier.py**. This tool offers **manual and automated renaming** of variables and functions after the initial deobfuscation process, giving users full control over making Lua scripts readable and maintainable.
 
+
+### 3. **testfile.py** (NEWEST)
+A fully new test file, just for now. 
+- **Requirements**: openai
+- pip install openai
+
+  
 #### Key Features:
 - **Interactive Renaming**: Detects all variables and functions in the deobfuscated Lua script and allows the user to manually rename them for better readability.
 - **Automated Renaming**: Offers an option to automatically rename variables and functions based on predefined patterns.
