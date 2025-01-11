@@ -34,7 +34,8 @@ A complementary script to **Luaminifier.py**. This tool offers **manual and auto
 ### 3. **testfile.py** (NEWEST)
 A fully new test file, just for now. 
 - **Requirements**: openai
-- pip install openai
+- `pip install openai` to actually use.
+- uses chatgpt after de-obfuscation, to help rename functions and variables, and change the spacing errors (obviously could be done manually).
 
   
 #### Key Features:
