@@ -109,5 +109,7 @@ A fully new test file, just for now.
 
 ---
 
+Made with AI (chatgpt), expect errors.
+
 ## 💡 **Contributing**
 If you have suggestions or improvements, feel free to open an issue or submit a pull request! Contributions are always welcome to help enhance these Lua deobfuscation tools.
