@@ -36,6 +36,7 @@ A fully new test file, just for now.
 - **Requirements**: openai api key (paid).
 - `pip install openai` to actually use.
 - uses chatgpt after de-obfuscation, to help rename functions and variables, and change the spacing errors (obviously could be done manually).
+- Has not been tested yet!
 
   
 #### Key Features:
